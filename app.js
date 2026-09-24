@@ -192,5 +192,108 @@ window.addEventListener('keydown', event => {
   if (event.altKey && event.key === 'ArrowLeft') { event.preventDefault(); selectChapter(currentChapter - 1); }
 });
 
+function buildPrintBook() {
+  const printBook = $('printBook');
+  const cover = document.createElement('header');
+  cover.className = 'print-cover';
+  const title = document.createElement('p');
+  title.className = 'print-kicker';
+  title.textContent = 'AN INTERACTIVE SHAKESPEARE STORY';
+  const heading = document.createElement('h1');
+  heading.textContent = 'The Second Bell';
+  const subtitle = document.createElement('p');
+  subtitle.className = 'print-subtitle';
+  subtitle.textContent = 'A journey through time, theatre, and the choices we make.';
+  cover.append(title, heading, subtitle);
+  printBook.append(cover);
+
+  chapters.forEach((chapter, chapterIndex) => {
+    const section = document.createElement('article');
+    section.className = 'print-chapter';
+    const chapterHeader = document.createElement('header');
+    chapterHeader.className = 'print-chapter-head';
+    const kicker = document.createElement('p');
+    kicker.className = 'print-kicker';
+    kicker.textContent = `CHAPTER ${chapter.number} · ${chapter.eyebrow}`;
+    const chapterTitle = document.createElement('h2');
+    chapterTitle.textContent = chapter.title;
+    const deck = document.createElement('p');
+    deck.className = 'print-deck';
+    deck.textContent = chapter.deck;
+    chapterHeader.append(kicker, chapterTitle, deck);
+
+    const story = document.createElement('div');
+    story.className = 'print-story';
+    const source = document.createElement('div');
+    source.innerHTML = chapter.html;
+    const chapterNotes = [];
+    source.querySelectorAll('button[data-note]').forEach(mark => {
+      const id = mark.dataset.note;
+      const note = notes[id];
+      if (!note) return;
+      const number = chapterNotes.length + 1;
+      chapterNotes.push({note, number});
+      const replacement = document.createElement('span');
+      replacement.className = `print-mark print-mark--${note.kind}`;
+      replacement.innerHTML = mark.innerHTML;
+      const ref = document.createElement('sup');
+      ref.className = 'print-ref';
+      ref.textContent = String(number);
+      replacement.append(ref);
+      mark.replaceWith(replacement);
+    });
+    story.append(...source.childNodes);
+    section.append(chapterHeader, story);
+
+    if (chapterNotes.length) {
+      const notesSection = document.createElement('section');
+      notesSection.className = 'print-notes';
+      const notesHeading = document.createElement('h3');
+      notesHeading.textContent = 'Language notes';
+      const notesIntro = document.createElement('p');
+      notesIntro.className = 'print-notes-intro';
+      notesIntro.textContent = 'Numbers in the story match the notes below.';
+      notesSection.append(notesHeading, notesIntro);
+      chapterNotes.forEach(({note, number}) => {
+        const card = document.createElement('article');
+        card.className = `print-note print-note--${note.kind}`;
+        const noteTitle = document.createElement('h4');
+        noteTitle.textContent = `${number}. ${note.title}`;
+        const quote = document.createElement('p');
+        quote.className = 'print-note-quote';
+        quote.textContent = note.quote;
+        const definition = document.createElement('p');
+        definition.innerHTML = `<strong>Meaning:</strong> ${note.definition}`;
+        const context = document.createElement('p');
+        context.innerHTML = `<strong>Here:</strong> ${note.here}`;
+        card.append(noteTitle, quote, definition, context);
+        if (note.scan) {
+          const scan = document.createElement('p');
+          scan.innerHTML = `<strong>Hear the beat:</strong> ${note.scan}`;
+          card.append(scan);
+        }
+        notesSection.append(card);
+      });
+      section.append(notesSection);
+    }
+
+    const reflection = document.createElement('aside');
+    reflection.className = 'print-reflection';
+    const prompt = document.createElement('strong');
+    prompt.textContent = 'Pause & think';
+    const question = document.createElement('p');
+    question.textContent = chapter.question;
+    const lines = document.createElement('div');
+    lines.className = 'print-writing-lines';
+    lines.setAttribute('aria-hidden', 'true');
+    reflection.append(prompt, question, lines);
+    section.append(reflection);
+    printBook.append(section);
+  });
+}
+
+$('printButton').addEventListener('click', () => window.print());
+
+buildPrintBook();
 buildConceptIndex();
 render(fromHash());
