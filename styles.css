@@ -11,3 +11,53 @@
 @media(max-width:680px){body{background:#16263d}.site{padding:0 8px 18px}.topbar{height:66px;gap:8px}.brand{font-size:15px;gap:7px}.brand-emblem{width:30px;height:30px;font-size:19px}.brand small{font-size:7px;letter-spacing:.18em;margin-top:4px}.top-actions{gap:8px}.top-actions button{padding:7px 9px;font-size:10px}.discovery-count{font-size:9px}.reader-shell{display:block}.book-wrap{display:block}.chapter-nav{padding:0 5px;gap:5px}.chapter-nav button{font-size:10px;padding:8px 9px}.chapter-nav button span{margin-right:4px}.book,.reader-shell.has-note .book{display:flex;flex-direction:column;height:auto;min-height:0;border-width:6px;border-radius:16px;box-shadow:0 16px 32px #07111f90}.book:after{display:none}.picture-page{padding:13px 20px 14px;min-height:260px}.page-engraving{font-size:8px;padding-bottom:7px}.art-frame{position:absolute;right:3px;top:14px;bottom:10px;width:52%;margin:0;opacity:.74}.art-label{display:none}.cover-copy{margin:auto 37% 0 0;padding-top:22px;z-index:1}.cover-eyebrow{font-size:9px;margin-bottom:4px}.cover-copy h1{font-size:34px}.cover-copy>p:nth-child(3){font-size:11px;line-height:1.4}.cover-rule{margin:8px 0 5px;width:30px}.cover-quote{font-size:12px;max-width:170px}.cover-footer{margin-top:13px;padding-top:8px;font-size:9px;z-index:1}.reading-page{overflow:visible;padding:17px 18px 12px;display:block}.reading-head{font-size:8px;padding-bottom:9px}.reading-scroll{overflow:visible;padding:19px 0 20px}.reading-intro{margin-bottom:18px}.reading-intro h2{font-size:36px}.story-text{font-size:17px;line-height:1.7}.verse{font-size:18px;padding:11px;margin-left:0;margin-right:0}.reading-check{margin-top:18px}.reading-foot{padding:11px 0 3px}.site-footer{display:block;text-align:center;font-size:10px}.site-footer>span:last-child{justify-content:center;flex-wrap:wrap;margin-top:9px;white-space:normal}.swatch{margin-left:3px}.note-backdrop{display:block;position:fixed;inset:0;background:#091628bb;opacity:0;visibility:hidden;pointer-events:none;z-index:39;transition:opacity .25s,visibility .25s}.has-note .note-backdrop{opacity:1;visibility:visible;pointer-events:auto}.note-panel{position:fixed;left:0;right:0;bottom:0;top:auto;width:100%;height:min(76dvh,680px);z-index:40;border-radius:20px 20px 0 0;transform:translateY(24px)}.has-note .note-panel{transform:translateY(0)}body.note-open{overflow:hidden}.note-scroll{padding:19px 22px}.note-scroll h2{font-size:32px}.concept-groups{grid-template-columns:1fr}.concept-head{padding:19px}.concept-head h2{font-size:32px}.concept-groups{padding:13px 19px 24px}}
 @media(max-width:380px){.discovery-count{display:none}.cover-copy h1{font-size:30px}.cover-copy{margin-right:35%}.art-frame{width:55%}.story-text{font-size:16px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+
+
+/* Compact actions on phones */
+.action-short{display:none}
+.top-actions{display:flex;align-items:center;gap:10px}
+@media(max-width:680px){
+  .top-actions{gap:6px}
+  .top-actions button{padding:9px 10px;font-size:12px;white-space:nowrap}
+  .action-long{display:none}
+  .action-short{display:inline}
+  .discovery-count{display:none}
+}
+
+/* A complete, uncluttered print edition */
+.print-book{display:none}
+@media print{
+  @page{size:A4;margin:15mm 16mm}
+  html,body{background:#fff!important;color:#17243b!important;min-width:0!important}
+  body{font-family:Georgia,"Times New Roman",serif!important;font-size:10.5pt!important;line-height:1.48!important}
+  .site{display:block!important;width:auto!important;max-width:none!important;margin:0!important;padding:0!important}
+  .topbar,#readerShell,.site-footer,.concept-dialog{display:none!important}
+  .print-book{display:block!important}
+  .print-cover{min-height:250mm;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;page-break-after:always;break-after:page;border:2px solid #bc8a37;padding:20mm}
+  .print-cover h1{font-size:42pt;line-height:1.05;margin:12mm 0 5mm;color:#122442}
+  .print-kicker{font:700 9pt/1.4 Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#a66e18;margin:0 0 3mm}
+  .print-subtitle{font-size:16pt;max-width:125mm;color:#39445a}
+  .print-chapter{break-before:page;page-break-before:always}
+  .print-chapter-head{border-bottom:1px solid #d8c79f;padding-bottom:5mm;margin-bottom:7mm}
+  .print-chapter-head h2{font-size:27pt;color:#17294c;margin:1mm 0}
+  .print-deck{font:italic 12pt/1.4 Arial,sans-serif;color:#536078;margin:0}
+  .print-story p{margin:0 0 4mm;orphans:3;widows:3}
+  .print-story .verse{margin:5mm 0;padding:3mm 5mm;border-left:3px solid #b88b36;background:#faf7ef;font-size:12pt;font-style:italic;break-inside:avoid}
+  .print-mark{font-weight:600;border-bottom:1.5px solid #9b762d}
+  .print-mark--poetry{background:#f2f5ff}
+  .print-mark--word{background:#f1f7f2}
+  .print-ref{font:700 7.5pt/1 Arial,sans-serif;color:#9b5b18;vertical-align:super;margin-left:1px}
+  .print-notes{margin-top:8mm;padding-top:4mm;border-top:2px solid #21375a}
+  .print-notes h3{font-size:17pt;color:#17294c;margin:0}
+  .print-notes-intro{font:9pt/1.4 Arial,sans-serif;color:#58647a;margin:1mm 0 4mm}
+  .print-note{border:1px solid #d8dce4;border-left:3px solid #bb8a34;border-radius:3px;padding:3mm 4mm;margin:0 0 3mm;break-inside:avoid}
+  .print-note--poetry{border-left-color:#5269b5}
+  .print-note--word{border-left-color:#317454}
+  .print-note h4{font:700 10pt/1.35 Arial,sans-serif;color:#17294c;margin:0 0 1mm}
+  .print-note p{font-size:9.2pt;margin:1mm 0}
+  .print-note-quote{font-style:italic;color:#4b3b68}
+  .print-reflection{margin-top:8mm;border:1px solid #d4b974;background:#fffaf0;padding:4mm 5mm;break-inside:avoid}
+  .print-reflection strong{font:700 9pt Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#855c11}
+  .print-reflection p{font-size:10pt;margin:2mm 0 4mm}
+  .print-writing-lines{height:18mm;background:repeating-linear-gradient(to bottom,transparent 0,transparent 7mm,#c8ccd3 7mm,#c8ccd3 7.2mm)}
+}
