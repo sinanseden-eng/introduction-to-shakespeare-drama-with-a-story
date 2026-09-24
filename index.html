@@ -16,7 +16,7 @@
     <header class="topbar">
       <a class="brand" href="#chapter-1" aria-label="The Second Bell, first chapter"><span class="brand-emblem" aria-hidden="true">✦</span><span>THE SECOND BELL <small>A SHAKESPEARE STORY</small></span></a>
       <span class="topbar-center">An interactive story in five chapters</span>
-      <div class="top-actions"><button id="conceptIndexButton" type="button">Explore ideas</button><span id="discoveryCount" class="discovery-count" aria-live="polite"></span></div>
+      <div class="top-actions"><button id="conceptIndexButton" type="button"><span class="action-long">Explore ideas</span><span class="action-short">Ideas</span></button><button id="printButton" type="button" aria-label="Print the complete story or save it as a PDF"><span aria-hidden="true">▤ </span><span class="action-long">Print / Save PDF</span><span class="action-short">Print PDF</span></button><span id="discoveryCount" class="discovery-count" aria-live="polite"></span></div>
     </header>
 
     <div id="readerShell" class="reader-shell">
@@ -108,6 +108,8 @@
 
     <footer class="site-footer"><span>A story for reading, noticing, and discussion.</span><span><i class="swatch swatch--device"></i> Literary device <i class="swatch swatch--poetry"></i> Poetry &amp; rhythm <i class="swatch swatch--word"></i> Earlier English</span></footer>
   </div>
+
+  <div id="printBook" class="print-book" aria-hidden="true"></div>
 
   <dialog id="conceptDialog" class="concept-dialog" aria-label="Index of ideas"><div class="concept-head"><div><span class="concept-eyebrow">EXPLORE THE STORY</span><h2>Index of ideas</h2><p>Choose an idea to jump to the moment it appears.</p></div><button id="closeConceptDialog" type="button" aria-label="Close index">✕</button></div><div id="conceptGroups" class="concept-groups"></div></dialog>
 </body>
